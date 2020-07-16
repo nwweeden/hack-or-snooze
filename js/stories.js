@@ -1,5 +1,17 @@
 "use strict";
 
+// const $body = $("body");
+
+// const $storiesLoadingMsg = $("#stories-loading-msg");
+// const $allStoriesList = $("#all-stories-list");
+
+// const $loginForm = $("#login-form");
+// const $signupForm = $("#signup-form");
+
+// const $navLogin = $("#nav-login");
+// const $navUserProfile = $("#nav-user-profile");
+// const $navLogOut = $("#nav-logout");
+
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 

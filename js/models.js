@@ -1,5 +1,17 @@
 "use strict";
 
+// const $body = $("body");
+
+// const $storiesLoadingMsg = $("#stories-loading-msg");
+// const $allStoriesList = $("#all-stories-list");
+
+// const $loginForm = $("#login-form");
+// const $signupForm = $("#signup-form");
+
+// const $navLogin = $("#nav-login");
+// const $navUserProfile = $("#nav-user-profile");
+// const $navLogOut = $("#nav-logout");
+
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
 
@@ -74,7 +86,12 @@ class StoryList {
    */
 
   async addStory( /* user, newStory */ ) {
-    // UNIMPLEMENTED: complete this function!
+    //create button to click with a listener
+    // once new listener is clicked, create a new form in the html
+    //jquery to that form to get the values
+    //send that to /stories via a post using axios
+    //get the information back from the API - some object {title, name, url}
+    
   }
 }
 
@@ -89,7 +106,7 @@ class User {
    * user to create, along with the token.
    */
 
-  constructor(userObj, token) {
+  constructor(userObj, token) {    
     this.username = userObj.username;
     this.name = userObj.name;
     this.createdAt = userObj.createdAt;
