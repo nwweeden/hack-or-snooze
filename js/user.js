@@ -1,5 +1,17 @@
 "use strict";
 
+// const $body = $("body");
+
+// const $storiesLoadingMsg = $("#stories-loading-msg");
+// const $allStoriesList = $("#all-stories-list");
+
+// const $loginForm = $("#login-form");
+// const $signupForm = $("#signup-form");
+
+// const $navLogin = $("#nav-login");
+// const $navUserProfile = $("#nav-user-profile");
+// const $navLogOut = $("#nav-logout");
+
 // global to hold the User instance of the currently-logged-in user
 let currentUser;
 
@@ -35,10 +47,9 @@ $loginForm.on("submit", login);
 async function signup(evt) {
   console.debug("signup", evt);
   evt.preventDefault();
-
-  const name = $("#create-account-name").val();
-  const username = $("#create-account-username").val();
-  const password = $("#create-account-password").val();
+  const name = $("#signup-name").val();
+  const username = $("#signup-username").val();
+  const password = $("#signup-password").val();
 
   // User.signup retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
