@@ -37,9 +37,9 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
     <!-- NEED TO HIDE OUR SUMIT AND FAVORITES -->
-    <a href="#" class='nav-link nav-login' id='nav-submit'>submit</a>
-    <a href="#" class='nav-link nav-login' id='nav-favorites'>favorites</a>
-    <a href="#" class='nav-link nav-login' id='nav-my-stories'>my stories</a>
+    <a href="#" class='nav-link main-nav-links' id='nav-submit'>submit</a>
+    <a href="#" class='nav-link main-nav-links' id='nav-favorites'>favorites</a>
+    <a href="#" class='nav-link main-nav-links' id='nav-my-stories'>my stories</a>
   </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
@@ -47,7 +47,16 @@
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
-
+<div id='#nav-submit'>
+  <form action="">
+    <label for="author">author</label>
+    <input type="text" placeholder='author-name' id='author'>
+    <label for="story">story</label>
+    <input type="text" placeholder='story' id='story'>
+    <label for="storyURL">storyURL</label>
+    <input type="text" placeholder='story-url' id ='storyURL'>
+  </form>
+</div>
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
 

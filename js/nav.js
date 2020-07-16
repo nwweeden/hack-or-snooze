@@ -48,3 +48,5 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+//should we call the story we are creating here with a new function???

@@ -87,11 +87,14 @@ class StoryList {
 
   async addStory( /* user, newStory */ ) {
     //create button to click with a listener
-    // once new listener is clicked, create a new form in the html
+    $('#nav-submit').on('click', function(){
+      //unhide our form
+    })
     //jquery to that form to get the values
+    $('')
     //send that to /stories via a post using axios
     //get the information back from the API - some object {title, name, url}
-    
+
   }
 }
 

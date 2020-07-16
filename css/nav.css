@@ -22,6 +22,10 @@ nav {
   text-align: right;
 }
 
-.nav-login {
+.nav-personal {
+  display: none;
+}
+
+#nav-submit {
   display: none;
 }

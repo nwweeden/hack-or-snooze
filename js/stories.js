@@ -57,3 +57,14 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+//Grab the author, story and story url and call the api
+function getStoryInput(){
+  let newStory = {
+    title: $('#author-name').val(),
+    author: $('#story').val(),
+    url: $('#story-url').val()
+  }
+  // let newStory = new Story($('#author-name').val(), author: $('#story').val())
+  addStory(currentUser, newStory)
+}
