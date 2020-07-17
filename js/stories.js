@@ -69,7 +69,8 @@ async function getStoryInputAndAddStory(){
  await storyList.addStory(currentUser, newStoryInput)
   // console.log(newStory);
   // console.log(storyList);
-  putStoriesOnPage()
+  putStoriesOnPage();
+  $submitForm.hide();
 }
 
 $("#submit-btn").on('click', async function(){

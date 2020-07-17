@@ -14,6 +14,8 @@ const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
 const $mainNavLinks = $('.main-nav-links');
+const $navSubmit = $('#nav-submit');
+const $submitForm = $('.submit-form');
 
 
 /** To make it easier for individual components to show just themselves, this
@@ -30,17 +32,29 @@ function hidePageComponents() {
   components.forEach(c => c.hide());
 }
 
+//hide the nav bar made just for signed in users
+function hideMainNavBar() {
+  console.debug('hideMainNavBar')
+  const components = [
+    $mainNavLinks,
+    $submitForm
+  ];
+  components.forEach(c => c.hide());
+}
 
 /** Overall function to kick off the app. */
 
 async function start() {
   console.debug("start");
+  
+  hideMainNavBar();
   // "Remember logged-in user" and log in, if credentials in localStorage
+  
   await checkForRememberedUser();
-
   storyList = await StoryList.getStories();
   $storiesLoadingMsg.remove();
 
+  
   putStoriesOnPage();
 }
 

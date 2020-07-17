@@ -43,10 +43,17 @@ $navLogin.on("click", navLoginClick);
 
 function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
-  $(".main-nav-links").show();
   $navLogin.hide();
   $navLogOut.show();
+  $mainNavLinks.show();
+  $allStoriesList.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
 
-//should we call the story we are creating here with a new function???
+/** When a user clicks on the submit form, the form drops down */
+function showSubmitForm(){
+  console.debug('showSubmitForm');
+  $submitForm.show();
+}
+
+$navSubmit.on('click',showSubmitForm)
