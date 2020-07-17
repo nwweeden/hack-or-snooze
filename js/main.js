@@ -6,6 +6,7 @@ const $body = $("body");
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
+const $storyStars = $('.story-star');
 
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
@@ -37,7 +38,7 @@ function hideMainNavBar() {
   console.debug('hideMainNavBar')
   const components = [
     $mainNavLinks,
-    $submitForm
+    $submitForm,
   ];
   components.forEach(c => c.hide());
 }
@@ -50,12 +51,14 @@ async function start() {
   hideMainNavBar();
   // "Remember logged-in user" and log in, if credentials in localStorage
   
+  let rememberedUser = await checkForRememberedUser();
   await checkForRememberedUser();
+  
   storyList = await StoryList.getStories();
   $storiesLoadingMsg.remove();
-
   
   putStoriesOnPage();
+  if(rememberedUser !== null) showStars();
 }
 
 

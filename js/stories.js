@@ -30,12 +30,13 @@ function generateStoryMarkup(story) {
   // render all the rest of the story markup
   return $(`
       <li id="${story.storyId}">
+        <i class='far fa-star story-star'></i>
         <a class="story-link" href="${story.url}" target="a_blank">
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
-        <small class="story-user">posted by ${story.username}</small>
+        <small class="story-user">posted by {story.username}</small>
       </li>
     `);
 }
@@ -77,3 +78,9 @@ $("#submit-btn").on('click', async function(){
       await getStoryInputAndAddStory()
       // console.log("btn working")
 })
+
+//show stars when user logs in
+function showStars(){
+  console.debug('showStar');
+  $('.story-star').css('display','inline')
+}

@@ -93,7 +93,7 @@ async function checkForRememberedUser() {
   // if there is a token in localStorage, call User.getLoggedInUser
   //  to get an instance of User with the right details
   currentUser = await User.loginViaStoredCredentials(token, username);
-  if (!currentUser) return;
+  if (!currentUser) return null;
 
   updateNavOnLogin();
 }
@@ -129,4 +129,7 @@ function updateUIOnUserLogin() {
 
   hidePageComponents();
   updateNavOnLogin();
+  showStars();
 }
+
+//when a user clicks on the star, fill in and add to favorites list
