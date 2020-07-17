@@ -85,16 +85,19 @@ class StoryList {
    * Returns the new story object
    */
 
-  async addStory( /* user, newStory */ ) {
-    //create button to click with a listener
-    $('#nav-submit').on('click', function(){
-      //unhide our form
-    })
-    //jquery to that form to get the values
-    $('')
-    //send that to /stories via a post using axios
-    //get the information back from the API - some object {title, name, url}
+  async addStory(user, newStory) {
+    let storyPostResponse = await axios.post(`${BASE_URL}/stories`, {
+      "token": user.loginToken,
+      "story": {
+          "author": newStory.author, 
+          "title": newStory.title,
+          "url": newStory.url
+      }
+   })
+   const newStory = new Story(storyPostResponse)
+   storyList.stories.push(newStory)
 
+   return newStory
   }
 }
 
