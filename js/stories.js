@@ -60,6 +60,18 @@ function putStoriesOnPage() {
   // loop through all of our stories and generate HTML for them
   for (let story of storyList.stories) {
     const markup = generateStoryMarkup(story);
+    
+    if(currentUser){
+      console.log('currentUser.Favorites:', currentUser.favorites);
+      console.log('story:', story)
+      if(currentUser.favorites.includes(story)){
+        // console.log('story:', story)
+        // console.log('story.storyId', story.storyId)
+        $(`star-${story.storyId}`).toggleClass('fas fa-star story-star')
+      }
+      showStars();
+    }
+
     $allStoriesList.append(markup);
   }
   $allStoriesList.show();
@@ -70,15 +82,15 @@ $("#all-stories-list").on("click", "i", function(event){
   $(`#${event.target.id}`).toggleClass("far fa-star story-star").toggleClass("fas fa-star story-star")//this works
     let starStoryId = event.target.id.slice(5); //get story ID from star ID
     //console.log("story id: " + starStoryId)
-    console.log("currentUser.favorites: " + currentUser.favorites)
+    // console.log("currentUser.favorites: " + currentUser.favorites)
     let story = returnStoryObject(starStoryId); //make new Story from story ID
     //compare to favorites
     let idx = checkIfFavorited(story) // index of story here or -1
     if(idx > -1){//if found, remove from favorites
-      removeFavToUserAndAPI(story, idx)
+      currentUser.removeFavToUserAndAPI(story, idx);
     }
     else{
-      addFavToUserAndAPI(story)
+      currentUser.addFavToUserAndAPI(story)
     }
 })
 
@@ -114,6 +126,7 @@ async function getStoryInputAndAddStory(){
   // console.log(newStory);
   // console.log(storyList);
   putStoriesOnPage();
+  showStars();
   $submitForm.hide();
 }
 
@@ -124,3 +137,21 @@ function showStars(){
   console.debug('showStar');
   $('.story-star').css('display','inline')
 }
+
+//when a user clicks on favorites, only show favorited stories
+function putFavoritesOnPage(){
+  console.debug("onlyShowFavoritedStories");
+
+  // empty out that part of the page
+  $allStoriesList.empty();
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of currentUser.favorites) {
+    const markup = generateStoryMarkup(story);
+    $allStoriesList.append(markup);
+  }
+  $allStoriesList.show();
+}
+
+$navFavorites.on("click", putFavoritesOnPage);
+//

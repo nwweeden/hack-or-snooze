@@ -132,4 +132,19 @@ function updateUIOnUserLogin() {
   showStars();
 }
 
-//when a user clicks on the star, fill in and add to favorites list
+//when a user clicks on favorites, only show favorited stories
+function onlyShowFavoritedStories(){
+  console.debug("onlyShowFavoritedStories");
+
+  // empty out that part of the page
+  $allStoriesList.empty();
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of favorites) {
+    const markup = generateStoryMarkup(story);
+    $allStoriesList.append(markup);
+  }
+  $allStoriesList.show();
+}
+
+//

@@ -17,6 +17,7 @@ const $navLogOut = $("#nav-logout");
 const $mainNavLinks = $('.main-nav-links');
 const $navSubmit = $('#nav-submit');
 const $submitForm = $('.submit-form');
+const $navFavorites = $('#nav-favorites');
 
 
 /** To make it easier for individual components to show just themselves, this
@@ -46,7 +47,7 @@ function hideMainNavBar() {
 /** Overall function to kick off the app. */
 
 async function start() {
-  console.debug("start");
+  console.debug("starting");
   
   hideMainNavBar();
   // "Remember logged-in user" and log in, if credentials in localStorage

@@ -188,7 +188,7 @@ class User {
   async addFavToUserAndAPI(story){
     //add to user
     this.favorites.push(story)
-    let addResponse = axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`, {
+    await axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`, {
       "token": currentUser.loginToken
     })
 
@@ -196,10 +196,14 @@ class User {
 
   async removeFavToUserAndAPI(story, idx){
     //remove from user
-    this.favorites.splice(idx, 1)
-
-    let removeResponse = axios.delete(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`, {
+    // console.log(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`)
+    // console.log(currentUser.loginToken);
+    // console.log(currentUser.username)
+    let deleteReturn = await axios.delete(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`,
+      {params: {
       "token": currentUser.loginToken
-    })
+    }})
+    console.log(deleteReturn);
+    this.favorites.splice(idx, 1)
   }
 }
