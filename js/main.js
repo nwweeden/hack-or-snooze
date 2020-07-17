@@ -55,6 +55,12 @@ async function start() {
   await checkForRememberedUser();
   
   storyList = await StoryList.getStories();
+
+      /*DELETE LATER: fake stories for testing
+      console.log("testing from User class, returnStoryObject(stuff): " + returnStoryObject('3550a781-eecd-487a-8aac-be934cfda4c9'))
+      currentUser.favorites.push(returnStoryObject('3550a781-eecd-487a-8aac-be934cfda4c9'));
+      currentUser.favorites.push(returnStoryObject('9460f5dd-8d0e-4131-9976-8cafe56176b2'));*/
+
   $storiesLoadingMsg.remove();
   
   putStoriesOnPage();

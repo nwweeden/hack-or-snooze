@@ -44,8 +44,8 @@ function generateStoryMarkup(story) {
 //1. add listeners to stars
     //option: delegate listener
 //2. toggle the FA icon to filled in star DONE
-//3a. add clicked story to user's stories[]
-//3b. if favorite already, remove favorite from user's stories
+//3a. add clicked story to user's stories[] DONE
+//3b. if favorite already, remove favorite from user's stories DONE
 //4. add addFavoriteToUserAndAPI() to User class (adds clicked story to API via 'add new favorites' POST)
 //5. add removeFavoriteFromUserAndAPI() to User class 
 
@@ -67,17 +67,18 @@ function putStoriesOnPage() {
 
 //add toggling on stars and add/remove to favorites
 $("#all-stories-list").on("click", "i", function(event){
-  $(`#${event.target.id}`).toggleClass("far fa-star story-star").toggleClass("fas fa-star story-star")
-    let starStoryId = event.target.id.slice(5);
-    // console.log(starStoryId);
-    let story = returnStoryObject(starStoryId);
+  $(`#${event.target.id}`).toggleClass("far fa-star story-star").toggleClass("fas fa-star story-star")//this works
+    let starStoryId = event.target.id.slice(5); //get story ID from star ID
+    //console.log("story id: " + starStoryId)
+    console.log("currentUser.favorites: " + currentUser.favorites)
+    let story = returnStoryObject(starStoryId); //make new Story from story ID
     //compare to favorites
-    let i = checkIfFavorited(story)
-    if(i > -1){
-      currentUser.favorites.splice(i,1)
+    let idx = checkIfFavorited(story) // index of story here or -1
+    if(idx > -1){//if found, remove from favorites
+      removeFavToUserAndAPI(story, idx)
     }
     else{
-      currentUser.favorites.push(story)
+      addFavToUserAndAPI(story)
     }
 })
 
@@ -89,6 +90,9 @@ function returnStoryObject(starStoryID){
   }
 }
 
+/** Checks if a story is in user's favorites.
+ * @return {number} index of story if found, -1 if not.
+ */
 function checkIfFavorited(story){
   for (let i = 0; i < currentUser.favorites.length; i++){
     if (currentUser.favorites[i] === story){

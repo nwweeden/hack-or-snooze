@@ -125,7 +125,7 @@ class User {
 
     // instantiate Story instances for the user's favorites and ownStories
     this.favorites = userObj.favorites.map(s => new Story(s));
-    // this.favorites.push(returnStoryObject('6f40902c-b8be-4385-bb2c-c6044dac6820'));
+
     //this.ownStories = userObj.stories.map(s => new Story(s)); //LETS NOT FORGET THIS EXISTS!!!!!!
 
     // store the login token on the user so it's easy to find for API calls.
@@ -183,5 +183,23 @@ class User {
     });
 
     return new User(response.data.user, token);
+  }
+
+  async addFavToUserAndAPI(story){
+    //add to user
+    this.favorites.push(story)
+    let addResponse = axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`, {
+      "token": currentUser.loginToken
+    })
+
+  }
+
+  async removeFavToUserAndAPI(story, idx){
+    //remove from user
+    this.favorites.splice(idx, 1)
+
+    let removeResponse = axios.delete(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${story.storyId}`, {
+      "token": currentUser.loginToken
+    })
   }
 }
