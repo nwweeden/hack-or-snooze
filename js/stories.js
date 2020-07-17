@@ -30,7 +30,7 @@ function generateStoryMarkup(story) {
   // render all the rest of the story markup
   return $(`
       <li id="${story.storyId}">
-        <i class='far fa-star story-star'></i>
+        <i class='far fa-star story-star' id='star-${story.storyId}'></i>
         <a class="story-link" href="${story.url}" target="a_blank">
           ${story.title}
         </a>
@@ -40,7 +40,14 @@ function generateStoryMarkup(story) {
       </li>
     `);
 }
-
+/***TODO***/
+//1. add listeners to stars
+    //option: delegate listener
+//2. toggle the FA icon to filled in star DONE
+//3a. add clicked story to user's stories[]
+//3b. if favorite already, remove favorite from user's stories
+//4. add addFavoriteToUserAndAPI() to User class (adds clicked story to API via 'add new favorites' POST)
+//5. add removeFavoriteFromUserAndAPI() to User class 
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
@@ -55,8 +62,42 @@ function putStoriesOnPage() {
     const markup = generateStoryMarkup(story);
     $allStoriesList.append(markup);
   }
-
   $allStoriesList.show();
+}
+
+$("#all-stories-list").on("click", "i", function(event){
+  $(`#${event.target.id}`).toggleClass("far fa-star story-star").toggleClass("fas fa-star story-star")
+    let starStoryId = event.target.id.slice(5)
+
+
+  checkIfFavorited()
+  for (let story of storyList){
+    let storyIndex = checkIfFavorited(story)
+    if(storyIndex > -1){//exists? remove from currentUser.favorites
+      currentUser.favorites.splice(storyIndex, 1) //remove
+    }
+    else{ //add
+      currentUser.favorites.push()
+    }
+  }
+/*
+    for (let i = 0; i < storyList.stories.length; i++){
+      if (storyList.stories[i].storyId === starStoryId){
+        if (currentUser.favorites.includes(storyList.stories[i])){ //if it's not already in favorites, otherwise delete
+          //currentUser.favorites.(story)
+        }
+      }
+    }
+  */
+})
+
+function checkIfFavorited(story){
+  for (let i = 0; i < storyList.stories.length; i++){
+    if (storyList.stories[i].storyId === story.storyId){
+      return i
+    }
+  }
+  return -1
 }
 
 //Grab the author, story and story url and call the api
