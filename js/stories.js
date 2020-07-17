@@ -62,9 +62,9 @@ function putStoriesOnPage() {
 //Grab the author, story and story url and call the api
 async function getStoryInputAndAddStory(){
   let newStoryInput = {
-    author: $('#author').val(),
-    title: $('#title').val(),
-    url: $('#story-url').val()
+    author: $('#submit-form-author').val(),
+    title: $('#submit-form-title').val(),
+    url: $('#submit-form-story-url').val()
   }
   // console.log(title, author, url)
  await storyList.addStory(currentUser, newStoryInput)
@@ -74,10 +74,7 @@ async function getStoryInputAndAddStory(){
   $submitForm.hide();
 }
 
-$("#submit-btn").on('click', async function(){
-      await getStoryInputAndAddStory()
-      // console.log("btn working")
-})
+$("#submit-btn").on('click', getStoryInputAndAddStory)
 
 //show stars when user logs in
 function showStars(){
