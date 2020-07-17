@@ -1,20 +1,5 @@
 "use strict";
-
-// const $body = $("body");
-
-// const $storiesLoadingMsg = $("#stories-loading-msg");
-// const $allStoriesList = $("#all-stories-list");
-
-// const $loginForm = $("#login-form");
-// const $signupForm = $("#signup-form");
-
-// const $navLogin = $("#nav-login");
-// const $navUserProfile = $("#nav-user-profile");
-// const $navLogOut = $("#nav-logout");
-
-// This is the global list of the stories, an instance of StoryList
 let storyList;
-
 
 /**
  * A render method to render HTML for an individual Story instance
@@ -40,17 +25,8 @@ function generateStoryMarkup(story) {
       </li>
     `);
 }
-/***TODO***/
-//1. add listeners to stars
-    //option: delegate listener
-//2. toggle the FA icon to filled in star DONE
-//3a. add clicked story to user's stories[] DONE
-//3b. if favorite already, remove favorite from user's stories DONE
-//4. add addFavoriteToUserAndAPI() to User class (adds clicked story to API via 'add new favorites' POST)
-//5. add removeFavoriteFromUserAndAPI() to User class 
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
-
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
 
@@ -58,18 +34,21 @@ function putStoriesOnPage() {
   $allStoriesList.empty();
 
   // loop through all of our stories and generate HTML for them
-  for (let story of storyList.stories) {
-    const markup = generateStoryMarkup(story);
-    
+  //for (let story of storyList.stories) {
+
+  for (let i = 0; i < storyList.stories.length; i++){ //loop through all current stories
+    let markup = generateStoryMarkup(storyList.stories[i]); //CORRECT
+
     if(currentUser){
-      console.log('currentUser.Favorites:', currentUser.favorites);
-      console.log('story:', story)
-      if(currentUser.favorites.includes(story)){
-        // console.log('story:', story)
-        // console.log('story.storyId', story.storyId)
-        $(`star-${story.storyId}`).toggleClass('fas fa-star story-star')
+      console.log(currentUser.favorites)
+      for (let favorite of currentUser.favorites){
+        if (storyList.stories[i].storyId === favorite.storyId){
+          console.log(favorite.storyId)
+          //let debugVar = $("i")
+            $(`#star-${favorite.storyId}`).toggleClass("far fas")
+          }
       }
-      showStars();
+      showStars(); //CORRECT
     }
 
     $allStoriesList.append(markup);
@@ -154,4 +133,3 @@ function putFavoritesOnPage(){
 }
 
 $navFavorites.on("click", putFavoritesOnPage);
-//
