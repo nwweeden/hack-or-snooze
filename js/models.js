@@ -94,10 +94,15 @@ class StoryList {
           "url": newStory.url
       }
    })
-   const newStory = new Story(storyPostResponse)
-   storyList.stories.push(newStory)
+  //  console.log('new Story:',new Story(storyPostResponse))
+   let newStoryInstance = new Story(storyPostResponse.data.story)
+  //  console.log('storyPostResponse:',storyPostResponse);
+   storyList.stories.unshift(newStoryInstance)
+  //  console.log('storyPostResponse:',storyPostResponse)
+  //  console.log('newStoryInstance:',newStoryInstance)
+  //  console.log('storyList.stories',storyList.stories)
 
-   return newStory
+   return newStoryInstance;
   }
 }
 

@@ -65,12 +65,14 @@ async function getStoryInputAndAddStory(){
     title: $('#title').val(),
     url: $('#story-url').val()
   }
-  console.log(title, author, url)
-  let newStory = await storyList.addStory(currentUser, newStoryInput)
+  // console.log(title, author, url)
+ await storyList.addStory(currentUser, newStoryInput)
+  // console.log(newStory);
+  // console.log(storyList);
   putStoriesOnPage()
 }
 
-$("#submit-btn").on('click', function(){
-      getStoryInputAndAddStory()
-      console.log("btn working")
+$("#submit-btn").on('click', async function(){
+      await getStoryInputAndAddStory()
+      // console.log("btn working")
 })
