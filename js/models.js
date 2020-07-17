@@ -125,7 +125,7 @@ class User {
 
     // instantiate Story instances for the user's favorites and ownStories
     this.favorites = userObj.favorites.map(s => new Story(s));
-
+    // this.favorites.push(returnStoryObject('6f40902c-b8be-4385-bb2c-c6044dac6820'));
     //this.ownStories = userObj.stories.map(s => new Story(s)); //LETS NOT FORGET THIS EXISTS!!!!!!
 
     // store the login token on the user so it's easy to find for API calls.

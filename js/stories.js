@@ -65,39 +65,37 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+//add toggling on stars and add/remove to favorites
 $("#all-stories-list").on("click", "i", function(event){
   $(`#${event.target.id}`).toggleClass("far fa-star story-star").toggleClass("fas fa-star story-star")
-    let starStoryId = event.target.id.slice(5)
-
-
-  checkIfFavorited()
-  for (let story of storyList){
-    let storyIndex = checkIfFavorited(story)
-    if(storyIndex > -1){//exists? remove from currentUser.favorites
-      currentUser.favorites.splice(storyIndex, 1) //remove
+    let starStoryId = event.target.id.slice(5);
+    // console.log(starStoryId);
+    let story = returnStoryObject(starStoryId);
+    //compare to favorites
+    let i = checkIfFavorited(story)
+    if(i > -1){
+      currentUser.favorites.splice(i,1)
     }
-    else{ //add
-      currentUser.favorites.push()
+    else{
+      currentUser.favorites.push(story)
     }
-  }
-/*
-    for (let i = 0; i < storyList.stories.length; i++){
-      if (storyList.stories[i].storyId === starStoryId){
-        if (currentUser.favorites.includes(storyList.stories[i])){ //if it's not already in favorites, otherwise delete
-          //currentUser.favorites.(story)
-        }
-      }
-    }
-  */
 })
 
-function checkIfFavorited(story){
-  for (let i = 0; i < storyList.stories.length; i++){
-    if (storyList.stories[i].storyId === story.storyId){
-      return i
+function returnStoryObject(starStoryID){
+  for(let story of storyList.stories){
+    if(story.storyId === starStoryID){
+      return story;
     }
   }
-  return -1
+}
+
+function checkIfFavorited(story){
+  for (let i = 0; i < currentUser.favorites.length; i++){
+    if (currentUser.favorites[i] === story){
+      return i;
+    }
+  }
+  return -1;
 }
 
 //Grab the author, story and story url and call the api
